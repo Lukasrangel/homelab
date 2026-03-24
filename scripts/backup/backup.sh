@@ -7,7 +7,7 @@
 
 
 ###path to backup
-backup_dirs="/home"
+backup_dirs="/home /root /opt/pihole /etc"
 
 #log file
 log_file="/var/log/backup_service.log"
