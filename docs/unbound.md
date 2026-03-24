@@ -30,6 +30,12 @@ server:
     auto-trust-anchor-file: "/var/lib/unbound/root.key"
 ```
 
+## Abilitar port-Fowarding no servidor
+
+```bash
+sudo sysctl -w net.ipv4.ip_forward=1
+```
+
 ---
 
 ## Integração com Pi-hole
