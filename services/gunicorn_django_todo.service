@@ -1,0 +1,16 @@
+[Unit]
+Description=Gunicorn instance para o projeto web local Django Todo
+After=network.target
+
+[Service]
+User=cyx
+Group=www-data
+WorkingDirectory=/home/cyx/django_todo
+Environment="PATH=/home/cyx/django_todo/venv/bin"
+Environment="PYTHONPATH=/home/cyx/django_todo"
+
+ExecStart=/home/cyx/django_todo/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 todo.wsgi
+
+
+[Install]
+WantedBy=multi-user.target
