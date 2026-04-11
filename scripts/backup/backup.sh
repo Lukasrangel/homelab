@@ -40,6 +40,7 @@ bkp_local(){
                 printf "[$date_format] LOCAL STORAGE FAIL IMPOSSIBLE TO CONTINUE... ABORTIN BACKUP ROUTINE!! \n" >> $log_file
         exit 1;
         fi
+	find $local_storage -name "*.tar.gz" -mtime +7 -delete
 }
 
 
@@ -72,6 +73,7 @@ bkp_external(){
                 fi
 
         fi
+	find $external_storage -name "*.tar.gz" -mtime +7 -delete
 }
 
 #################################
@@ -79,7 +81,8 @@ bkp_external(){
 bkp_cloud(){
         if ping 1.1.1.1 -c 2 > /dev/null 2>&1
         then
-                rclone copy "$local_storage/$final_name.gpg" $cloud_storage
+		rclone delete mega: --min-age 7d  --include "*.tar.gz"
+                /usr/bin/rclone copy "$local_storage/$final_name.gpg" $cloud_storage
                 if [ $? -eq 0 ];
                 then
                         printf "[$date_format] THIRD STORAGE - TO CLOUD - SUCESSFULL!!! \n" >> $log_file
