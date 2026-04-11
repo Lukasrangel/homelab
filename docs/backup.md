@@ -73,9 +73,7 @@ O envio para nuvem é feito utilizando o **rclone**, com integração ao Mega.
 ### Instalação:
 
 ```bash
-wget https://downloads.rclone.org/rclone-current-linux-386.zip
-unzip rclone-current-linux-386.zip
-cp rclone-*/rclone /usr/local/bin/
+curl https://rclone.org/install.sh | sudo bash
 ```
 
 ### Configuração:
