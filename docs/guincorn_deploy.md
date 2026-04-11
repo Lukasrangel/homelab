@@ -37,6 +37,17 @@ python manage.py migrate</code></pre>
 <p>Apenas para desenvolvimento local.</p>
 </div>
 
+
+<div class="section">
+<h2>Permissão das pastas static</h2>
+<pre><code>sudo chown -R www-data:www-data /caminho/static <br />
+sudo chmod -R 755 /caminho/staticr <br /><br />
+chmod 755 /caminho
+chmod 755 /caminho/static
+</code></pre>
+
+</div>
+
 <div class="section">
 <h2>Gunicorn</h2>
 <pre><code>pip install gunicorn
