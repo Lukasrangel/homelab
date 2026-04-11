@@ -30,9 +30,8 @@ O ambiente é composto por um servidor principal responsável por:
 
 ### Sistema Operacional
 
-* Debian 10 (Buster) — arquitetura x86
+* Debian 13 (Trixie) — arquitetura x64
 
-> ⚠️ Planejado upgrade para versão mais recente
 
 ---
 
