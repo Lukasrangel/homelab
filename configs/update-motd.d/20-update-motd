@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+
+figlet -f big "$(hostname)"
+
+
+RAM=$(free -h | awk '/Mem/ {print $7}')
+CPU_TEMP=$(sensors | grep -m 1 'Package id 0' | awk '{print $4}')
+BKP=$(tail -n 3 /var/log/backup_service.log)
+
+echo "┌───────────────────────────────┐"
+echo "   Servidor  $(hostname)"
+echo "├───────────────────────────────┤"
+echo "| CPU: $CPU_TEMP                |"
+echo "| RAM LIVRE: $RAM               |"
+echo "└───────────────────────────────┘"
+
+echo "########## LAST BACKUP ###############################"
+echo ""
+echo "$BKP"
