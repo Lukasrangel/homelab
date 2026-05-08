@@ -26,26 +26,54 @@ O ambiente é composto por um servidor principal responsável por:
 * RAM: 4GB
 * Armazenamento externo: Pen Drive 16GB (backup)
 
+### 🖥️ Servidor - *Sentinela*
+
+* Notebook Positivo
+* CPU: Intel i3-6006U
+* RAM 4GB
+
 ---
 
 ### Sistema Operacional
 
-* Debian 13 (Trixie) — arquitetura x64
+* Debian 13 (Trixie) — arquitetura x64 - *Artemis*
+* Debian 13 (Trixie) — arquitetura x64 - *Sentilea* 
 
 
 ---
 
-## Serviços Ativos
+## Funções de cada Servidor
+
+# *Sentinela*
+
+* Borda de segurança da rede responsável pelo DNS e Pi-hole, concentra monitoramento.
+
+# Serviços Ativos
 
 ### Infraestrutura
 
 * **Pi-hole** → DNS interno com bloqueio de anúncios
 * **Unbound** → resolvedor DNS recursivo (privacidade + performance)
-* **Nginx** → proxy reverso para aplicações internas
+* **NetData** → Concentra informções/métricas de todos os nós da rede, monitora e envia alertas via telegram
+
 
 ---
 
-### Aplicações
+## *Artemis*
+
+
+* Hospeda os containers dockers para aplicações web e proxysvia NGINX
+
+# Serviços Ativos
+
+### Infraestrutura
+
+* **Nginx** → proxy reverso para aplicações internas
+* **Doker** → gerenciando as aplicações web
+
+---
+
+# Aplicações
 
 * **TodoList **
 
@@ -53,6 +81,11 @@ O ambiente é composto por um servidor principal responsável por:
   * Integração via Nginx
   * https://github.com/Lukasrangel/django-todo
 
+
+* **NeoTube**
+
+  * Backend em PHP (PHP-FPM)
+  * Script python no fundo 
 ---
 
 ## Automação
@@ -100,21 +133,25 @@ homelab/
 
 ### Infraestrutura
 
-* [ ] Atualizar Debian para versão estável mais recente
-* [ ] Adicionar segundo servidor (alta disponibilidade / testes distribuídos)
+* [X] Atualizar Debian para versão estável mais recente
+* [X] Adicionar segundo servidor (alta disponibilidade / testes distribuídos)
 
 ---
 
 ### Aplicações
 
-* [ ] Deploy de aplicação PHP com FPM
+* [X] Deploy de aplicação PHP com FPM
 * [ ] Exposição segura via Cloudflare Tunnel
+* [X] Dockerizar apps
+
 
 ---
 
 ### Observabilidade
 
 * [ ] Monitoramento de estado do servidor
+* [ ] NetData em ambos os nós
+* [ ] Serviço de monitoramento bash + bot telegram
 * [ ] Integração com Arduino + display LED (status físico do sistema)
 
 ---
