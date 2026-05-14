@@ -1,0 +1,29 @@
+server {
+         listen       80;   
+         server_name  neotube.web.zda; 
+         root         /var/www/neotube_docker; 
+
+     access_log /var/log/nginx/neotube-access.log; 
+     error_log  /var/log/nginx/neotube-error.log error;	
+     index index.html index.htm index.php;			
+
+     location / {
+                  try_files $uri $uri/ /index.php?url=$request_uri;  
+
+     }
+
+     location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+	fastcgi_param SERVER_NAME $host;
+	fastcgi_param HTTP_HOST $host;
+        #fastcgi_pass unix:/var/run/fpm-neotube-site.sock; 
+        fastcgi_pass 127.0.0.1:9000;
+	include fastcgi.conf;
+	fastcgi_param SCRIPT_FILENAME /www$fastcgi_script_name;
+	fastcgi_index index.php;
+
+	fastcgi_read_timeout 300; # 300 segundos = 5 minutos de paciência
+    	fastcgi_send_timeout 300;
+    	fastcgi_connect_timeout 300;
+     }
+}
