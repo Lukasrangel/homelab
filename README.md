@@ -78,7 +78,7 @@ O ambiente é composto por um servidor principal responsável por:
 
 # Aplicações
 
-* **TodoList **
+* **TodoList**
 
   * Backend em Python (Gunicorn)
   * Integração via Nginx
@@ -152,9 +152,8 @@ homelab/
 
 ### Observabilidade
 
-* [ ] Monitoramento de estado do servidor
-* [ ] NetData em ambos os nós
-* [ ] Serviço de monitoramento bash + bot telegram
+* [x] Monitoramento de estado do servidor
+* [x] Serviço de monitoramento bash + bot telegram
 * [ ] Integração com Arduino + display LED (status físico do sistema)
 
 ---
