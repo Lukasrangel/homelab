@@ -54,7 +54,9 @@ O ambiente é composto por um servidor principal responsável por:
 
 * **Pi-hole** → DNS interno com bloqueio de anúncios
 * **Unbound** → resolvedor DNS recursivo (privacidade + performance)
-* **NetData** → Concentra informções/métricas de todos os nós da rede, monitora e envia alertas via telegram
+* **Uptime Kuma** → Monitora servidores e serviços, envia alertas via telegram
+* **Homer** → Painel Home Page que concentra os serviços da rede
+* **Tailscale** → Nó da rede tailscale para acesso remoto
 
 
 ---
@@ -70,6 +72,7 @@ O ambiente é composto por um servidor principal responsável por:
 
 * **Nginx** → proxy reverso para aplicações internas
 * **Doker** → gerenciando as aplicações web
+* **Tailscale** → Nó na rede tailscale, para acesso remoto
 
 ---
 
