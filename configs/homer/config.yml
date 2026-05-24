@@ -1,0 +1,91 @@
+---
+# Homepage configuration
+# See https://fontawesome.com/search for icons options
+
+title: "Zona Digital Autônoma Dashboard"
+subtitle: "ZDA"
+# logo:
+icon: "fas fa-skull-crossbones"
+
+# Optional theme customization
+theme: default
+
+# Optional theme customization (color overrrides)
+# overrrides can also be done using CSS vars
+colors:
+  light:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#f5f5f5"
+    card-background: "#ffffff"
+    text: "#363636"
+    text-header: "#ffffff"
+    text-title: "#303030"
+    text-subtitle: "#424242"
+    card-shadow: rgba(0, 0, 0, 0.1)
+    link: "#3273dc"
+    link-hover: "#363636"
+  dark:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#131313"
+    card-background: "#2b2b2b"
+    text: "#eaeaea"
+    text-header: "#ffffff"
+    text-title: "#fafafa"
+    text-subtitle: "#f5f5f5"
+    card-shadow: rgba(0, 0, 0, 0.4)
+    link: "#3273dc"
+    link-hover: "#ffdd57"
+
+# Optional message
+message:
+  #url: https://b4bz.io
+  style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
+  title: "Zona Digital Autônoma"
+  content: "Links Uteis <br /> github <a href='https://github.com/Lukasrangel/homelab'>https://github.com/Lukasrangel/homelabhttps://github.com/Lukasrangel/homelab</a> <br /> Blog Técnico <a href='https://luksdev.site/'> Luks Dev </a> <br /> Tailscale <a href='https://login.tailscale.com/login?next_url=%2Fadmin%2Fmachines'> https://login.tailscale.com/login?next_url=%2Fadmin%2Fmachines</a>"
+
+# Optional navbar
+# links: [] # Allows for navbar (dark mode, layout, and search) without any links
+links:
+  - name: "Contribute"
+    icon: "fab fa-github"
+    url: "https://github.com/bastienwirtz/homer"
+    target: "_blank" # optional html a tag target attribute
+  - name: "Wiki"
+    icon: "fas fa-book"
+    url: "https://www.wikipedia.org/"
+  # this will link to a second homer page that will load config from additional-page.yml and keep default config values as in config.yml file
+  # see url field and assets/additional-page.yml.dist used in this example:
+  #- name: "another page!"
+  #  icon: "fas fa-file-alt"
+  #  url: "#additional-page"
+
+
+# Optional: enable periodic refresh for all smart cards that implements it (unless overriden at service configuration level).
+updateIntervalMs: 30000 # interval in milliseconds, minimum is 1000 (1s). Remove or set to 0 to disable. Can be overriden at service level. (default disabled)
+
+# Services
+# First level array represent a group.
+# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
+services:
+  - name: "Monitors"
+    icon: "fa-solid fa-server"
+    items:
+      - name: "Pi-hole"
+        logo: "assets/tools/pihole.svg"
+        url: http://sentinela.zda:8080/admin
+      - name: "Uptime Kuma"
+        icon: "assets/tools/kuma.svg"
+        url: http://sentinela.zda:3001
+  - name: "Applications"
+    icon: "fas fa-cloud"
+    items:
+      - name: ToDo List
+        logo: ""
+        url: https://todo.web.zda/
+      - name: Neotube (Local)
+        logo: ""
+        url: http://neotube.web.zda/youtHub
