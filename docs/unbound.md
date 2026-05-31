@@ -101,3 +101,26 @@ Verificar upstream configurado:
 export GPG_TTY=$(tty)
 ```
 
+
+
+---
+
+## Verrificar logs
+
+
+```bash
+sudo journalctl -u unbound.service -n 50 --no-pager
+```
+
+---
+
+## Gerar nova chave DNSSEC
+
+```bash
+sudo unbound-anchor -a "/var/lib/unbound/root.key"
+```
+
+---
+
+
+
