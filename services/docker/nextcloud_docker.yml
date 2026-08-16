@@ -1,0 +1,47 @@
+ervices:
+  db:
+    image: mariadb:10.11
+    container_name: nextcloud-db
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - ./data/db:/var/lib/mysql      # Salva na pasta ./data/db do projeto
+    env_file:
+      - db.env
+    networks:
+      - nextcloud-net
+
+  redis:
+    image: redis:alpine
+    container_name: nextcloud-redis
+    restart: always
+    command: redis-server --requirepass SuaSenhaRedisSuperSegura789
+    volumes:
+      - ./data/redis:/data            # Salva na pasta ./data/redis do projeto
+    networks:
+      - nextcloud-net
+
+  app:
+    image: nextcloud:stable-apache
+    container_name: nextcloud-app
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./data/nextcloud:/var/www/html # Salva na pasta ./data/nextcloud do projeto
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=SUA_SENHADO_DB
+      - REDIS_HOST=redis
+      - REDIS_HOST_PASSWORD=SuaSenhaRedisSuperSegura789
+    depends_on:
+      - db
+      - redis
+    networks:
+      - nextcloud-net
+
+networks:
+  nextcloud-net:
+    driver: bridge
