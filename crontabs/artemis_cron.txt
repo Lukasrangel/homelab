@@ -1,0 +1,13 @@
+# Backup a cada dois dias 2h15h da manhã
+15 2 */2 * * /usr/bin/flock -n /tmp/backup.lock /root/backup.sh
+
+
+# Apaga toda pasta de mp3 e mp4 do neotube 2h da manhã
+0 2 * * * rm -f /var/www/neotube_docker/mp3/* && rm -f /var/www/neotube_docker/mp4/*
+
+# Verifica temperatura da cpu a cada 5 minutos
+*/5 * * * * /root/cpu_monitor.sh
+
+
+# Verifica a taxa de HashRate a cada 20 minutos
+*/20 * * * * /root/ping_hashrate.sh
