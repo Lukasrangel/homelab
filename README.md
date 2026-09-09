@@ -34,10 +34,17 @@ O ambiente é composto por um servidor principal responsável por:
 
 ---
 
+### 🖥️ Servidor - *Brutus*
+
+* Desktop 
+* CPU: AMD A10-7890K Radeon R7
+* RAM 16GB
+
 ### Sistema Operacional
 
 * Debian 13 (Trixie) — arquitetura x64 - *Artemis*
-* Debian 13 (Trixie) — arquitetura x64 - *Sentilea* 
+* Debian 13 (Trixie) — arquitetura x64 - *Sentinela*
+* Ubuntu 26.04 LTS) — arquitetura x64 - *Brutus* 
 
 
 ---
@@ -57,6 +64,7 @@ O ambiente é composto por um servidor principal responsável por:
 * **Uptime Kuma** → Monitora servidores e serviços, envia alertas via telegram
 * **Homer** → Painel Home Page que concentra os serviços da rede
 * **Tailscale** → Nó da rede tailscale para acesso remoto
+* **SMB**  → Pasta compartilhada na rede local e Tailscale como Drive
 
 
 ---
@@ -89,7 +97,20 @@ O ambiente é composto por um servidor principal responsável por:
 
   * Backend em PHP (PHP-FPM)
   * Script python no fundo 
+  
 ---
+
+## *Brutus*
+
+### Infraestrutura
+
+* **SMB** → Backup do SMB do Sentinela
+* **mdadm** → RAID1 de todo o sistema com um HD de desktop + HD de notebook
+* **Tailscale** → Nó na rede tailscale, para acesso remoto
+* **NextCloud** → Drive e suite office 
+
+---
+
 
 ## Automação
 
