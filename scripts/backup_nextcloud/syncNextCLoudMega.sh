@@ -11,8 +11,8 @@
 #####
 #       Telegran notifications
 #####
-API_TOKEN=8835742153:AAGpoiU63Qxi3k08X32rwN7X5_l4XoJgP7A
-CHAT_ID=8575042701
+API_TOKEN=<API-TOKEN>
+CHAT_ID=<CHAT-ID>
 
 send_notification() {
     local msg="$1"
