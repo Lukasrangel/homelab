@@ -1,10 +1,57 @@
 server {
          listen       80;   
          server_name  neotube.web.zda; 
-         root         /var/www/neotube_docker; 
 
-     access_log /var/log/nginx/neotube-access.log; 
-     error_log  /var/log/nginx/neotube-error.log error;	
+	real_ip_header CF-Connecting-IP;
+	real_ip_recursive on;
+
+
+	set_real_ip_from 127.0.0.1;
+
+
+#	access_log /var/log/nginx/neotube/realip-debug.log realip_debug;
+ 	access_log /var/log/nginx/neotube/neotube-access.log;
+     	error_log  /var/log/nginx/neotube/neotube-error.log error;
+     	index index.html index.htm index.php;
+	root /var/www/neotube_docker;	
+
+     	location / {
+                  try_files $uri $uri/ /index.php?url=$request_uri;
+
+        }
+
+	location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_param SERVER_NAME $host;
+        fastcgi_param HTTP_HOST $host;
+
+        #fastcgi_pass unix:/var/run/fpm-neotube-site.sock;
+        fastcgi_pass 127.0.0.1:9000;
+        include fastcgi.conf;
+        fastcgi_param SCRIPT_FILENAME /www$fastcgi_script_name;
+        fastcgi_index index.php;
+
+
+        fastcgi_read_timeout 500; # 300 segundos = 5 minutos de paciência
+        fastcgi_send_timeout 500;
+        fastcgi_connect_timeout 500;
+     }
+
+ 
+}
+
+
+server {
+  
+     listen 443 ssl;
+     server_name neotube.web.zda;
+
+     ssl_certificate /etc/nginx/ssl/neotube.web.zda/neotube.web.zda.pem;
+     ssl_certificate_key /etc/nginx/ssl/neotube.web.zda/neotube.web.zda-key.pem;
+     root /var/www/neotube_docker;
+
+     access_log /var/log/nginx/neotube/neotube-access.log; 
+     error_log  /var/log/nginx/neotube/neotube-error.log error;	
      index index.html index.htm index.php;			
 
      location / {
@@ -22,8 +69,9 @@ server {
 	fastcgi_param SCRIPT_FILENAME /www$fastcgi_script_name;
 	fastcgi_index index.php;
 
-	fastcgi_read_timeout 300; # 300 segundos = 5 minutos de paciência
-    	fastcgi_send_timeout 300;
-    	fastcgi_connect_timeout 300;
+
+	fastcgi_read_timeout 500; # 300 segundos = 5 minutos de paciência
+    	fastcgi_send_timeout 500;
+    	fastcgi_connect_timeout 500;
      }
 }
