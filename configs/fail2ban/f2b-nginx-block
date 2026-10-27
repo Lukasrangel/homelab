@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -euo pipefail
+
+IP="${1:?Informe o IP}"
+ACTION="${2:?Informe ban ou unban}"
+
+MAP="/etc/nginx/fail2ban-blocked-ips.map"
+LOCK="/run/lock/f2b-nginx-block.lock"
+
+
+# Valida endereço IPV4 ou IPV6
+python3 -c 'import ipaddress,sys; ipaddress.ip_address(sys.argv[1])' "$IP"
+
+
+# Garante que o arquivo exista
+touch "$MAP"
+
+
+# Evita execuções simultâneas do script
+exec 9>"$LOCK"
+flock 9
+
+
+case "$ACTION" in
+	ban)
+		if ! grep -Fqx "$IP 1;" "$MAP"; then
+			printf '%s 1;\n' "$IP" >> "$MAP"
+		fi
+		;;
+	unban)
+		grep -Fvx "$IP 1;" "$MAP" > "$MAP.tmp" || true
+        	mv "$MAP.tmp" "$MAP"
+        	;;
+	*)
+		echo "Uso: $0 IP ban|unban" >&2
+        	exit 2
+        	;;
+esac
+
+
+# Só recarrega se a configuração estiver válida
+nginx -t
+systemctl reload nginx
