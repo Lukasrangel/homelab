@@ -8,12 +8,17 @@ Este repositório documenta a arquitetura, serviços e rotinas utilizadas no amb
 
 ## Estrutura do Homelab
 
-O ambiente é composto por um servidor principal responsável por:
+O ambiente é composto por tres servidores:
 
 * roteamento DNS interno
 * proxy reverso para aplicações
 * execução de serviços web
 * rotinas automatizadas (backup)
+* containers dockers
+* monitoraçao do ambiente
+* plataforma de hospedagem de blogs wordpress
+* drive colaborativo (NextCLoud)
+* Cofre de senhas (Vaultwarden)
 
 ---
 
@@ -44,7 +49,7 @@ O ambiente é composto por um servidor principal responsável por:
 
 * Debian 13 (Trixie) — arquitetura x64 - *Artemis*
 * Debian 13 (Trixie) — arquitetura x64 - *Sentinela*
-* Ubuntu 26.04 LTS) — arquitetura x64 - *Brutus* 
+* Debian 13 (Trixie) — arquitetura x64 - *Brutus* 
 
 
 ---
@@ -53,7 +58,7 @@ O ambiente é composto por um servidor principal responsável por:
 
 # *Sentinela*
 
-* Borda de segurança da rede responsável pelo DNS e Pi-hole, concentra monitoramento.
+* Borda de segurança da rede responsável pelo DNS e Pi-hole, manten cofre de senhas e samba na rede interna, concentra monitoramento.
 
 # Serviços Ativos
 
@@ -65,6 +70,8 @@ O ambiente é composto por um servidor principal responsável por:
 * **Homer** → Painel Home Page que concentra os serviços da rede
 * **Tailscale** → Nó da rede tailscale para acesso remoto
 * **SMB**  → Pasta compartilhada na rede local e Tailscale como Drive
+* **Vaultwarden** → Cofre de senhas
+* **Nginx Proxy Manager** → Centraliza acesso aos containers
 
 
 ---
@@ -72,7 +79,7 @@ O ambiente é composto por um servidor principal responsável por:
 ## *Artemis*
 
 
-* Hospeda os containers dockers para aplicações web e proxysvia NGINX
+* Hospeda os containers dockers para aplicações web e proxys via NGINX
 
 # Serviços Ativos
 
@@ -81,6 +88,8 @@ O ambiente é composto por um servidor principal responsável por:
 * **Nginx** → proxy reverso para aplicações internas
 * **Doker** → gerenciando as aplicações web
 * **Tailscale** → Nó na rede tailscale, para acesso remoto
+* **Hospedagem Wordpress** → Scripts de provisionamento ambiente de hospedagem Wordpress
+* **NextCloud** → Drive de fanzines 
 
 ---
 
@@ -96,8 +105,12 @@ O ambiente é composto por um servidor principal responsável por:
 * **NeoTube**
 
   * Backend em PHP (PHP-FPM)
-  * Script python no fundo 
-  
+  * Script python no fundo
+
+* **punkzinese.org**
+
+  * Ambiente de provisionamento e hospedagem de Blogs Wordpress
+  * Drive de fanzines via NextCloud
 ---
 
 ## *Brutus*
@@ -107,7 +120,6 @@ O ambiente é composto por um servidor principal responsável por:
 * **SMB** → Backup do SMB do Sentinela
 * **mdadm** → RAID1 de todo o sistema com um HD de desktop + HD de notebook
 * **Tailscale** → Nó na rede tailscale, para acesso remoto
-* **NextCloud** → Drive e suite office 
 
 ---
 
@@ -165,7 +177,7 @@ homelab/
 ### Aplicações
 
 * [X] Deploy de aplicação PHP com FPM
-* [ ] Exposição segura via Cloudflare Tunnel
+* [X] Exposição segura via Cloudflare Tunnel
 * [X] Dockerizar apps
 
 
@@ -195,6 +207,5 @@ Este homelab serve como ambiente de:
 
 ---
 
-## Notas
 
 Este projeto está em constante evolução. Novos serviços e melhorias são adicionados conforme testes e necessidades surgem.
