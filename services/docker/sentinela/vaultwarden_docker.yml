@@ -1,0 +1,16 @@
+services:
+    server:
+        container_name: vaultwarden
+        restart: unless-stopped
+        volumes:
+            - /opt/vaultwarden/data/:/data/
+        ports:
+            - 127.0.0.1:8081:80
+        image: vaultwarden/server:latest
+        networks:
+          - proxy
+
+networks:
+  proxy:
+    external: true
+

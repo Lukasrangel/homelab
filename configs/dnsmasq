@@ -1,0 +1,16 @@
+interface=tailscale0
+except-interface=lo
+listen-address=<tailscale-ip>
+bind-interfaces
+
+# Não utilizar servidores DNS do sistema
+no-resolv
+
+# Encaminhar consultas desconhecidas para o pi-hole local
+server=/#/192.168.1.6
+
+# Registros DNS dos serviços
+host-record=vaultwarden.sentinela.zda,<tailscale-ip>
+host-record=homer.sentinela.zda,<tailscale-ip>
+host-record=uptime.sentinela.zda,<tailscale-ip>
+
